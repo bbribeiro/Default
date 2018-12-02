@@ -46,7 +46,7 @@ Contents:
 
 *Clean data*
 
-\- 'default.dta': clean default dat
+\- 'default.dta': clean default data
 
 	 
 ### Docs
