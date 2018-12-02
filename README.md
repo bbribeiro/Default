@@ -21,11 +21,15 @@ Contents:
 
 \- 'old':                     folder with previous versions of the codes
 
-\- \__default_MASTERFILE.do: master do-file
+\- '\__default_MASTERFILE.do': master do-file
 	
-\- _clean_temp_dir.do:      delete all the temporary files in the 'tmp' directory (see 2. DATA below)
+\- '_clean_temp_dir.do':      delete all the temporary files in the 'tmp' directory (see 2. DATA below)
 	
-\- _name.do:                load program that cleans string variables
+\- '_name.do':                load program that cleans string variables
+
+\- 'data_default.do':         cleans default data
+
+\- 'analysis_default.do':     run default analysis
 
 	
 ### Data
@@ -38,11 +42,11 @@ Contents:
 	
 *Raw data*
 	
-\- 'original/\*':
+\- 'original/default.xlsx': raw default data
 
 *Clean data*
 
-\- '\*.dta':
+\- 'default.dta': clean default dat
 
 	 
 ### Docs
@@ -58,9 +62,11 @@ Contents:
 
 \- 'old': folder with previous versions of paper and slides, and old files
 
+\- 'default_paper.docx': latest version of default paper
+
 *Slides*
 	
-\- 'slides/\*.pptx':
+\- 'slides/default_slides.pptx':
 
 ### Results
 
@@ -76,9 +82,13 @@ Contains both raw and clean output produced by analysis do-files.
 
 \- 'tables/old': folder with previous versions of the tables
 
+\- 'tables/default.xls': default output table
+
 *Figures*
 
 \- 'figures/old': folder with previous versions of the figures
+
+\- 'figures/default.png': default output fugure
 
 
 ## **How to clean the data and run the analysis**
