@@ -1,0 +1,59 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Bernardo\Dropbox\WB\job\code\github\default/results/logs/analysis_default_1Dec2018.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 1 Dec 2018, 19:46:34
+{txt}
+{com}. 
+. /* Load data */
+. use "$data/default.dta", clear
+{txt}
+{com}. 
+. egen cty=group(country)
+{txt}
+{com}. tsset cty year
+{res}{txt}{col 8}panel variable:  {res}cty (strongly balanced)
+{txt}{col 9}time variable:  {res}{col 25}year, 1996 to 2016
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}. 
+. reg log_gdppc L.log_gdppc
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     4,679
+{txt}{hline 13}{c +}{hline 34}   F(1, 4677)      > {res} 99999.00
+{txt}       Model {c |} {res} 6631.05428         1  6631.05428   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 12.5828706     4,677  .002690372   {txt}R-squared       ={res}    0.9981
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9981
+{txt}       Total {c |} {res} 6643.63715     4,678  1.42018751   {txt}Root MSE        =   {res} .05187
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}   log_gdppc{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}log_gdppc {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9965652{col 26}{space 2} .0006348{col 37}{space 1} 1569.95{col 46}{space 3}0.000{col 54}{space 4} .9953208{col 67}{space 3} .9978097
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0309907{col 26}{space 2} .0015309{col 37}{space 1}   20.24{col 46}{space 3}0.000{col 54}{space 4} .0279894{col 67}{space 3}  .033992
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. outreg2 using "$results/tables/default.xls", excel replace
+{txt}{browse `"C:\Users\Bernardo\Dropbox\WB\job\code\github\default/results/tables/default.xls"'}
+{browse `"C:\Users\Bernardo\Dropbox\WB\job\code\github\default"' :dir}{com} : {txt}{stata `"seeout using "C:\Users\Bernardo\Dropbox\WB\job\code\github\default/results/tables/default.txt""':seeout}
+
+{com}. 
+. twoway scatter log_gdppc L.log_gdppc
+{res}{txt}
+{com}. graph export "$results/figures/default.png", replace width(500)
+{txt}(note: file C:\Users\Bernardo\Dropbox\WB\job\code\github\default/results/figures/default.png not found)
+(file C:\Users\Bernardo\Dropbox\WB\job\code\github\default/results/figures/default.png written in PNG format)
+
+{com}. 
+. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Bernardo\Dropbox\WB\job\code\github\default/results/logs/analysis_default_1Dec2018.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 1 Dec 2018, 19:46:39
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

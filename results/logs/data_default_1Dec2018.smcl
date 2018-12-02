@@ -1,0 +1,119 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Bernardo\Dropbox\WB\job\code\github\default/results/logs/data_default_1Dec2018.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 1 Dec 2018, 19:42:33
+{txt}
+{com}. 
+. /* Load data */
+. import excel using "$data/original/default.xlsx", clear firstrow
+{res}{txt}
+{com}. 
+. rename CountryName country_name
+{res}{txt}
+{com}.         qui clean_names country_name
+{txt}
+{com}. rename CountryCode country
+{res}{txt}
+{com}. keep country country_name YR*
+{txt}
+{com}.         drop if country==""
+{txt}(5 observations deleted)
+
+{com}.         
+. reshape long YR, i(country country_name) j(year)
+{txt}(note: j = 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}     264   {txt}->{res}    6600
+{txt}Number of variables            {res}      27   {txt}->{res}       4
+{txt}j variable (25 values)                    ->   {res}year
+{txt}xij variables:
+               {res}YR1993 YR1994 ... YR2017   {txt}->   {res}YR
+{txt}{hline 77}
+
+{com}.         rename YR gdppc
+{res}{txt}
+{com}.         destring gdppc, force replace
+{txt}gdppc: contains nonnumeric bytes; {res}replaced {txt}as {res}double
+{txt}(1026 missing values generated)
+{res}{txt}
+{com}.         drop if year==2017
+{txt}(264 observations deleted)
+
+{com}.         
+. replace gdppc=gdppc/1000
+{txt}(5,574 real changes made)
+
+{com}. format gdppc %9.2f
+{txt}
+{com}. 
+. gen gdppc_2=(gdppc)^2
+{txt}(762 missing values generated)
+
+{com}. format gdppc_2 %9.2f
+{txt}
+{com}. 
+. gen log_gdppc=log(gdppc)
+{txt}(762 missing values generated)
+
+{com}. format log_gdppc %9.2f
+{txt}
+{com}. 
+. gen log_gdppc_2=(log_gdppc)^2
+{txt}(762 missing values generated)
+
+{com}. format log_gdppc_2 %9.2f
+{txt}
+{com}.         
+. keep if year>=1996 & year<=2016
+{txt}(792 observations deleted)
+
+{com}. 
+. label var year         "Year"
+{txt}
+{com}. label var country      "Country code"
+{txt}
+{com}. label var country_name "Country name"
+{txt}
+{com}. label var gdppc        "GDP per capita (2011 USD PPP 000s)"
+{txt}
+{com}. label var gdppc_2      "Square GDP per capita (2011 USD PPP 000s)"
+{txt}
+{com}. label var log_gdppc    "Log GDP per capita (2011 USD PPP 000s)"
+{txt}
+{com}. label var log_gdppc_2  "Square log GDP per capita (2011 USD PPP 000s)"
+{txt}
+{com}. 
+. qui compress
+{txt}
+{com}. save "data/default.dta", replace
+{txt}file data/default.dta saved
+
+{com}. 
+. /* Save temporary files with country codes */
+. keep country country_name
+{txt}
+{com}. duplicates drop
+
+{p 0 4}{txt}Duplicates in terms of {txt} all variables{p_end}
+
+(5,280 observations deleted)
+
+{com}. 
+. qui compress
+{txt}
+{com}. save "$tmp/tmp.dta", replace
+{txt}file C:\Users\Bernardo\Dropbox\WB\job\code\github\default/data/tmp/tmp.dta saved
+
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Bernardo\Dropbox\WB\job\code\github\default/results/logs/data_default_1Dec2018.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 1 Dec 2018, 19:42:33
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
